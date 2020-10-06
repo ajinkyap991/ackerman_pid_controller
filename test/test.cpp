@@ -47,7 +47,7 @@ TEST(controllerTest, paramSetTest) {
     pidController.setKd(2.3);
     pidController.setKi(3.6);
 
-    EXPECT_EQ(5.6, velController.getKp());
-    EXPECT_EQ(2.3, velController.getKd());
-    EXPECT_EQ(3.6, velController.getKi());
+    EXPECT_EQ(5.6, pidController.getKp());
+    EXPECT_EQ(2.3, pidController.getKd());
+    EXPECT_EQ(3.6, pidController.getKi());
 }
