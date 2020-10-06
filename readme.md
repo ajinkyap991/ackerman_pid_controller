@@ -1,7 +1,12 @@
-# C++ Boilerplate
+# Ackerman PID Controller
 [![Build Status](https://travis-ci.org/ajinkyap991/ackerman_pid_controller.svg?branch=master)](https://travis-ci.org/ajinkyap991/ackerman_pid_controller)
 [![Coverage Status](https://coveralls.io/repos/github/ajinkyap991/ackerman_pid_controller/badge.svg?branch=master)](https://coveralls.io/github/ajinkyap991/ackerman_pid_controller?branch=master)
 ---
+
+## Authors
+
+Ajinkya Parwekar (Driver)
+Karan Sutradhar (Navigator)
 
 ## Overview
 
@@ -124,3 +129,4 @@ perspetive view (or Windows->Perspective->Open Perspective->C/C++).
 - Git
 
     It is possible to manage version control through Eclipse and the git plugin, but it typically requires creating another project. If you're interested in this, try it out yourself and contact me on Canvas.
+
