@@ -125,6 +125,38 @@ class pidController {
   double getIntegralError();
 
   /**
+   * @brief Function to compute the arc radius of the wheel from rotation point.
+   * @param None.
+   * @return arc radius.
+   */
+
+  double computeArcRadius();
+
+  /**
+   * @brief Function to compute the wheel velocities of both wheels.
+   * @param None.
+   * @return wheel velocity.
+   */
+
+  double computeWheelVelocity();
+
+  /**
+   * @brief Function to compute the steering angle for the wheel from rotation point.
+   * @param steering angle, velocity of right wheel, velocity of left wheel and heading output.
+   * @return steering angle.
+   */
+
+  double computeSteeringAngle(double steeringAngle, double rightWheelVelocity, double leftWheelVelocity, double headingOutput);
+
+  /**
+   * @brief Function to set the setpoint values.
+   * @param setpoint velocity and setpoint heading.
+   * @return None.
+   */
+
+  void setSetPoints(double setpointVelocity, double setpointHeading);
+
+  /**
    * Destructor for PID controller
    * @param None.
    * @return None.
