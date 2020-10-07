@@ -50,7 +50,8 @@
    * @return None.
    */
 
-  void pidController::setKp(double) {
+  void pidController::setKp(double kpIn) {
+    kp = kpIn;
   }
 
   /**
@@ -59,7 +60,8 @@
    * @return None.
    */
 
-  void pidController::setKd(double) {
+  void pidController::setKd(double kdIn) {
+    kd = kdIn;
   }
 
   /**
@@ -68,7 +70,8 @@
    * @return None.
    */
 
-  void pidController::setKi(double) {
+  void pidController::setKi(double kiIn) {
+    ki = kiIn;
   }
 
   /**
@@ -86,7 +89,7 @@
    * @return kp (Proportional gain)
    */
 
-  double pidController::getkp() {
+  double pidController::getKp() {
       return kp;
   }
 

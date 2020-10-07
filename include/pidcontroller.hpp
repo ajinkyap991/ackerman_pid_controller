@@ -82,7 +82,7 @@ class pidController {
    * @return kp (Proportional gain)
    */
 
-  double getkp();
+  double getKp();
 
   /**
    * @brief Function to get the differential gain variable of the PID controller
