@@ -51,3 +51,58 @@ TEST(controllerTest, paramSetTest) {
     EXPECT_EQ(2.3, controller.getKd());
     EXPECT_EQ(3.6, controller.getKi());
 }
+
+/**
+ * @brief This test checks if the control law works as expected
+ * @param controllerTest is the name of the group of tests
+ * @param getVeriableTest1 is the specific name to check the get veriable function
+ */
+
+TEST(controllerTest, getVeriableTest1) {
+    pidController controller(1, 0, 0);
+    EXPECT_EQ(0, controller.getPreviousError());
+}
+
+/**
+ * @brief This test checks if the control law works as expected
+ * @param controllerTest is the name of the group of tests
+ * @param getVeriableTest2 is the specific name to check the get veriable function
+ */
+
+TEST(controllerTest, getVeriableTest2) {
+    pidController controller(1, 0, 0);
+    EXPECT_EQ(0, controller.getIntegralError());
+}
+
+/**
+ * @brief This test checks if the control law works as expected
+ * @param controllerTest is the name of the group of tests
+ * @param getVeriableTest3 is the specific name to check the get veriable function
+ */
+
+TEST(controllerTest, getVeriableTest3) {
+    pidController controller(1, 0, 0);
+    EXPECT_EQ(0, controller.computeArcRadius());
+}
+
+/**
+ * @brief This test checks if the control law works as expected
+ * @param controllerTest is the name of the group of tests
+ * @param getVeriableTest4 is the specific name to check the get veriable function
+ */
+
+TEST(controllerTest, getVeriableTest4) {
+    pidController controller(1, 0, 0);
+    EXPECT_EQ(0, controller.computeWheelVelocity());
+}
+
+/**
+ * @brief This test checks if the control law works as expected
+ * @param controllerTest is the name of the group of tests
+ * @param getVeriableTest5 is the specific name to check the get veriable function
+ */
+
+TEST(controllerTest, getVeriableTest5) {
+    pidController controller(1, 0, 0);
+    EXPECT_EQ(0, controller.computeSteeringAngle(0, 0, 0, 0));
+}

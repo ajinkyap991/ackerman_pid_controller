@@ -130,7 +130,7 @@
    */
 
   double pidController::getPreviousError() {
-      return previousError;
+      return 0;
   }
 
   /**
@@ -140,7 +140,7 @@
    */
 
   double pidController::getIntegralError() {
-      return integralError;
+      return 0;
   }
 
   /**
@@ -149,7 +149,7 @@
    * @return arc radius.
    */
 
-  double computeArcRadius() {
+  double pidController::computeArcRadius() {
       // stub implementation
       return 0;
   }
@@ -160,7 +160,7 @@
    * @return wheel velocity.
    */
 
-  double computeWheelVelocity() {
+  double pidController::computeWheelVelocity() {
       // stub implementation
       return 0;
   }
@@ -171,7 +171,8 @@
    * @return steering angle.
    */
 
-  double computeSteeringAngle(double steeringAngle, double rightWheelVelocity, double leftWheelVelocity, double headingOutput) {
+  double pidController::computeSteeringAngle(double steeringAngle, double rightWheelVelocity,
+  double leftWheelVelocity, double headingOutput) {
       // stub implementation
       return steeringAngle + rightWheelVelocity + leftWheelVelocity + headingOutput;
   }
@@ -182,7 +183,7 @@
    * @return None.
    */
 
-  void setSetPoints(double setpointVelocity, double setpointHeading) {
+  void pidController::setSetPoints(double setpointVelocity, double setpointHeading) {
       double test1 = setpointVelocity;
       double test2 = setpointHeading;
   }
