@@ -8,7 +8,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "../include/pidcontroller.hpp"
+#include "pidcontroller.hpp"
 
 /**
  * @brief This test checks if the control law works as expected
@@ -18,7 +18,7 @@
 
 TEST(controllerTest, controlFunctionTest1) {
     pidController controller(1, 0, 0);
-    EXPECT_EQ(2, pidController.compute(2));
+    EXPECT_EQ(2, controller.compute(2));
 }
 
 
@@ -29,10 +29,10 @@ TEST(controllerTest, controlFunctionTest1) {
  */
 
 TEST(controllerTest, paramGetTest) {
-    pidController velController(2.7, 4.5, 6.3);
-    EXPECT_EQ(2.7, pidController.getKp());
-    EXPECT_EQ(4.5, pidController.getKd());
-    EXPECT_EQ(6.3, pidController.getKi());
+    pidController controller(2.7, 4.5, 6.3);
+    EXPECT_EQ(2.7, controller.getKp());
+    EXPECT_EQ(4.5, controller.getKd());
+    EXPECT_EQ(6.3, controller.getKi());
 }
 
 /**
@@ -41,13 +41,13 @@ TEST(controllerTest, paramGetTest) {
 * @param paramSetTest is the specific name to check the getControlParam function
 */
 TEST(controllerTest, paramSetTest) {
-    Controller velController(2.7, 4.5, 6.3);
+    pidController controller(2.7, 4.5, 6.3);
 
-    pidController.setKp(5.6);
-    pidController.setKd(2.3);
-    pidController.setKi(3.6);
+    controller.setKp(5.6);
+    controller.setKd(2.3);
+    controller.setKi(3.6);
 
-    EXPECT_EQ(5.6, pidController.getKp());
-    EXPECT_EQ(2.3, pidController.getKd());
-    EXPECT_EQ(3.6, pidController.getKi());
+    EXPECT_EQ(5.6, controller.getKp());
+    EXPECT_EQ(2.3, controller.getKd());
+    EXPECT_EQ(3.6, controller.getKi());
 }
