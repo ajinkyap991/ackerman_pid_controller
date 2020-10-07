@@ -124,6 +124,26 @@
   }
 
   /**
+   * @brief Function to return the previous error value (for test suite)
+   * @param None.
+   * @return Previous error value(previousError).
+   */
+
+  double pidController::getPreviousError() {
+      return previousError;
+  }
+
+  /**
+   * @brief Function to return the integral error value (for test suite)
+   * @param None.
+   * @return Integral error value(integralError).
+   */
+
+  double pidController::getIntegralError() {
+      return integralError;
+  }
+
+  /**
    * Destructor for PID controller
    * @param None.
    * @return None.

@@ -107,3 +107,28 @@ class pidController {
    */
 
   double getDt();
+
+  /**
+   * @brief Function to return the previous error value (for test suite)
+   * @param None.
+   * @return Previous error value(previousError).
+   */
+
+  double getPreviousError();
+
+  /**
+   * @brief Function to return the integral error value (for test suite)
+   * @param None.
+   * @return Integral error value(integralError).
+   */
+
+  double getIntegralError();
+
+  /**
+   * Destructor for PID controller
+   * @param None.
+   * @return None.
+   */
+
+  // ~pidController();
+};
