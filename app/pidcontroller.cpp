@@ -21,10 +21,11 @@
   }
 
   /**
-   * @brief Constructor for PID controller class with three gain parameters.
-   * @param kp Proportional Gain of PID controller.
-   * @param kd Differential Gain of PID controller.
-   * @param ki Integral Gain of PID controller.
+   * @brief Constructor for PID controller class with three gain parameters and time variable.
+   * @param kpValue Proportional Gain of PID controller.
+   * @param kdValue Differential Gain of PID controller.
+   * @param kiValue Integral Gain of PID controller.
+   * @param dtValue time variable for controller.
    * @return None.
    */
 
@@ -34,13 +35,22 @@
     kd = kdValue;
     ki = kiValue;
     dt = dtValue;
+    kb = 0;
+    error = 0;
+    previousError = 0;
+    integralError = 0;
   }
 
   /**
    * @brief Constructor for PID controller class with all private attributes.
-   * @param kp Proportional Gain of PID controller.
-   * @param kd Differential Gain of PID controller.
-   * @param ki Integral Gain of PID controller.
+   * @param kpValue Proportional Gain of PID controller.
+   * @param kdValue Differential Gain of PID controller.
+   * @param kiValue Integral Gain of PID controller.
+   * @param kbValue Variable for back calculation to eliminate windup.
+   * @param dtValue time variable for controller.
+   * @param errorvalue error value for proportional gain.
+   * @param previousErrorValue error value for differential gain.
+   * @param integralErrorValue error value for integral gain.
    * @return None.
    */
 
@@ -131,7 +141,7 @@
 
   /**
    * @brief Function to set the error value of the PID controller
-   * @param error (for proportional error))
+   * @param error (for proportional gain error))
    * @return None.
    */
 
@@ -141,7 +151,7 @@
 
   /**
    * @brief Function to set the previous error of the PID controller
-   * @param previousError (for differential error)
+   * @param previousError (for differential gain error)
    * @return None.
    */
 
@@ -151,7 +161,7 @@
 
   /**
    * @brief Function to set the integral error of the PID controller
-   * @param integralError (for integral error)
+   * @param integralError (for integral gain error)
    * @return None.
    */
 
@@ -212,7 +222,7 @@
   /**
    * @brief Function to get the proportional error value of the PID controller
    * @param None
-   * @return error (for proportional error)
+   * @return error (for proportional gain error)
    */
 
   double pidController::getError() {
@@ -222,7 +232,7 @@
   /**
    * @brief Function to get the previous error value of the PID controller
    * @param None
-   * @return previousError (for differential error)
+   * @return previousError (for differential gain error)
    */
 
   double pidController::getPreviousError() {
@@ -232,7 +242,7 @@
   /**
    * @brief Function to get the integral error value of the PID controller
    * @param None
-   * @return integralError (for integral error)
+   * @return integralError (for integral gain error)
    */
 
   double pidController::getIntegralError() {
@@ -268,8 +278,7 @@
    */
 
   double pidController::computeSteeringAngle(double steeringAngle,
-    double rightWheelVelocity,
-  double leftWheelVelocity, double headingOutput) {
+    double rightWheelVelocity, double leftWheelVelocity, double headingOutput) {
       // stub implementation
       return steeringAngle + rightWheelVelocity
       + leftWheelVelocity + headingOutput;

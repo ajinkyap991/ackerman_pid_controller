@@ -28,9 +28,10 @@ class pidController {
 
   /**
    * @brief Constructor for PID controller class with three gain parameters and time variable.
-   * @param kp Proportional Gain of PID controller.
-   * @param kd Differential Gain of PID controller.
-   * @param ki Integral Gain of PID controller.
+   * @param kpValue Proportional Gain of PID controller.
+   * @param kdValue Differential Gain of PID controller.
+   * @param kiValue Integral Gain of PID controller.
+   * @param dtValue time variable for controller.
    * @return None.
    */
 
@@ -38,9 +39,14 @@ class pidController {
 
   /**
    * @brief Constructor for PID controller class with all private attributes.
-   * @param kp Proportional Gain of PID controller.
-   * @param kd Differential Gain of PID controller.
-   * @param ki Integral Gain of PID controller.
+   * @param kpValue Proportional Gain of PID controller.
+   * @param kdValue Differential Gain of PID controller.
+   * @param kiValue Integral Gain of PID controller.
+   * @param kbValue Variable for back calculation to eliminate windup.
+   * @param dtValue time variable for controller.
+   * @param errorvalue error value for proportional gain.
+   * @param previousErrorValue error value for differential gain.
+   * @param integralErrorValue error value for integral gain.
    * @return None.
    */
 
