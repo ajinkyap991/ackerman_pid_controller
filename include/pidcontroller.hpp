@@ -16,7 +16,7 @@
 
 class pidController {
  private:
-  double kp, kd, ki, error, previousError, integralError, dt;
+  double kp, kd, ki, kb, error, previousError, integralError, dt;
 
  public:
   /**
@@ -27,7 +27,7 @@ class pidController {
   pidController();
 
   /**
-   * @brief Constructor for PID controller class with three gain parameters.
+   * @brief Constructor for PID controller class with three gain parameters and time variable.
    * @param kp Proportional Gain of PID controller.
    * @param kd Differential Gain of PID controller.
    * @param ki Integral Gain of PID controller.
@@ -35,6 +35,17 @@ class pidController {
    */
 
   pidController(double kpValue, double kdValue, double kiValue, double dtValue);
+
+  /**
+   * @brief Constructor for PID controller class with all private attributes.
+   * @param kp Proportional Gain of PID controller.
+   * @param kd Differential Gain of PID controller.
+   * @param ki Integral Gain of PID controller.
+   * @return None.
+   */
+
+  pidController(double kpValue, double kdValue, double kiValue, double kbValue,
+    double dtValue, double errorValue, double previousErrorValue, double integralErrorValue);
 
   /**
    * @brief Function to compute the output of the PID controller.
@@ -79,12 +90,44 @@ class pidController {
   void setKi(double);
 
   /**
+   * @brief Function to set the back calculation variable of the PID controller
+   * @param kb (for back calculation)
+   * @return None.
+   */
+
+  void setKb(double);
+
+  /**
    * @brief Function to set the time variable of the PID controller
    * @param dt (time variable)
    * @return None.
    */
 
   void setDt(double);
+
+  /**
+   * @brief Function to set the error value of the PID controller
+   * @param error (for proportional error))
+   * @return None.
+   */
+
+  void setError(double);
+
+  /**
+   * @brief Function to set the previous error of the PID controller
+   * @param previousError (for differential error)
+   * @return None.
+   */
+
+  void setPreviousError(double);
+
+  /**
+   * @brief Function to set the integral error of the PID controller
+   * @param integralError (for integral error)
+   * @return None.
+   */
+
+  void setIntegralError(double);
 
   /**
    * @brief Function to get the proportional gain variable of the PID controller
@@ -111,12 +154,44 @@ class pidController {
   double getKi();
 
   /**
+   * @brief Function to get the back calculation variable of the PID controller
+   * @param None
+   * @return kb (for back calculation)
+   */
+
+  double getKb();
+
+  /**
    * @brief Function to get the time variable value of the PID controller
    * @param None
    * @return dt (time variable)
    */
 
   double getDt();
+
+  /**
+   * @brief Function to get the proportional error value of the PID controller
+   * @param None
+   * @return error (for proportional error)
+   */
+
+  double getError();
+
+  /**
+   * @brief Function to get the previous error value of the PID controller
+   * @param None
+   * @return previousError (for differential error)
+   */
+
+  double getPreviousError();
+
+  /**
+   * @brief Function to get the integral error value of the PID controller
+   * @param None
+   * @return integralError (for integral error)
+   */
+
+  double getIntegralError();
 
   /**
    * @brief Function to compute the arc radius of the wheel from rotation point.
@@ -140,7 +215,8 @@ class pidController {
    * @return steering angle.
    */
 
-  double computeSteeringAngle(double steeringAngle, double rightWheelSpeed, double leftWheelSpeed, double compassHeadingOutput);
+  double computeSteeringAngle(double steeringAngle, double rightWheelSpeed,
+    double leftWheelSpeed, double compassHeadingOutput);
 
   /**
    * @brief Function to generate the throttle output value.

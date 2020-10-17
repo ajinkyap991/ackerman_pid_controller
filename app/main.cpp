@@ -14,5 +14,7 @@ int main() {
     // stub implementation
     pidController controller(1, 0, 0, 0);
     std::cout << controller.computeControlAction(2, 0) << std::endl;
+    controller.changeInTime(1.0);
+    controller.setSetPoints(1.0, 1.0);
     return 0;
 }
