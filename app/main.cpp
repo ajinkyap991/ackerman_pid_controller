@@ -12,7 +12,7 @@
 
 int main() {
     // stub implementation
-    pidController controller(1, 0, 0);
-    std::cout << controller.compute(2) << std::endl;
+    pidController controller(1, 0, 0, 0);
+    std::cout << controller.computeControlAction(2, 0) << std::endl;
     return 0;
 }

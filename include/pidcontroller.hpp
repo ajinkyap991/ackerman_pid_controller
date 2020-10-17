@@ -16,7 +16,7 @@
 
 class pidController {
  private:
-  double kp, ki, kd, error, previousError, integralError, dt;
+  double kp, kd, ki, error, previousError, integralError, dt;
 
  public:
   /**
@@ -33,7 +33,8 @@ class pidController {
    * @param ki Integral Gain of PID controller.
    * @return None.
    */
-  pidController(double kp, double kd, double ki);
+
+  pidController(double kpValue, double kdValue, double kiValue, double dtValue);
 
   /**
    * @brief Function to compute the output of the PID controller.
@@ -42,7 +43,16 @@ class pidController {
    * @return controlAction Output calculated by the PID controller using the gain values.
    */
 
-  double compute(double feedback);
+  double computeControlAction(double feedback, double setpoint);
+
+  /**
+   * @brief Function to change the time value.
+   * @param newDt (new time value).
+   * @return None.
+   */
+
+  void changeInTime(double newDt);
+
 
   /**
    * @brief Function to set the proportional gain variable of the PID controller
@@ -109,22 +119,6 @@ class pidController {
   double getDt();
 
   /**
-   * @brief Function to return the previous error value (for test suite)
-   * @param None.
-   * @return Previous error value(previousError).
-   */
-
-  double getPreviousError();
-
-  /**
-   * @brief Function to return the integral error value (for test suite)
-   * @param None.
-   * @return Integral error value(integralError).
-   */
-
-  double getIntegralError();
-
-  /**
    * @brief Function to compute the arc radius of the wheel from rotation point.
    * @param None.
    * @return arc radius.
@@ -138,7 +132,7 @@ class pidController {
    * @return wheel velocity.
    */
 
-  double computeWheelVelocity();
+  double computeWheelSpeed();
 
   /**
    * @brief Function to compute the steering angle for the wheel from rotation point.
@@ -146,7 +140,15 @@ class pidController {
    * @return steering angle.
    */
 
-  double computeSteeringAngle(double steeringAngle, double rightWheelVelocity, double leftWheelVelocity, double headingOutput);
+  double computeSteeringAngle(double steeringAngle, double rightWheelSpeed, double leftWheelSpeed, double compassHeadingOutput);
+
+  /**
+   * @brief Function to generate the throttle output value.
+   * @param None.
+   * @return throttle output value.
+   */
+
+  double throttleOutput();
 
   /**
    * @brief Function to set the setpoint values.
@@ -154,7 +156,7 @@ class pidController {
    * @return None.
    */
 
-  void setSetPoints(double setpointVelocity, double setpointHeading);
+  void setSetPoints(double setpointSpeed, double setpointHeading);
 
   /**
    * Destructor for PID controller

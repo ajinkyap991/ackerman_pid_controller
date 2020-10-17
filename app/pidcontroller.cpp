@@ -16,6 +16,7 @@
    * @param None.
    * @return None.
    */
+
   pidController::pidController() {
   }
 
@@ -26,10 +27,12 @@
    * @param ki Integral Gain of PID controller.
    * @return None.
    */
-  pidController::pidController(double kpIn, double kdIn, double kiIn) {
+
+  pidController::pidController(double kpIn, double kdIn, double kiIn, double dtIn) {
     kp = kpIn;
     kd = kdIn;
     ki = kiIn;
+    dt = dtIn;
   }
 
   /**
@@ -39,9 +42,20 @@
    * @return controlAction Output calculated by the PID controller using the gain values.
    */
 
-  double pidController::compute(double feedback) {
+  double pidController::computeControlAction(double feedback, double setpoint) {
     // stub implementation
-    return feedback*1;
+    return feedback+setpoint;
+  }
+
+  /**
+   * @brief Function to change the time value.
+   * @param newDt (new time value).
+   * @return None.
+   */
+
+  void changeInTime(double newDt) {
+  	//stub implementation
+  	double test = newDt;
   }
 
   /**
@@ -80,7 +94,8 @@
    * @return None.
    */
 
-  void pidController::setDt(double) {
+  void pidController::setDt(double dtIn) {
+  	dt = dtIn;
   }
 
   /**
@@ -124,26 +139,6 @@
   }
 
   /**
-   * @brief Function to return the previous error value (for test suite)
-   * @param None.
-   * @return Previous error value(previousError).
-   */
-
-  double pidController::getPreviousError() {
-      return 0;
-  }
-
-  /**
-   * @brief Function to return the integral error value (for test suite)
-   * @param None.
-   * @return Integral error value(integralError).
-   */
-
-  double pidController::getIntegralError() {
-      return 0;
-  }
-
-  /**
    * @brief Function to compute the arc radius of the wheel from rotation point.
    * @param None.
    * @return arc radius.
@@ -160,7 +155,7 @@
    * @return wheel velocity.
    */
 
-  double pidController::computeWheelVelocity() {
+  double pidController::computeWheelSpeed() {
       // stub implementation
       return 0;
   }
@@ -178,13 +173,24 @@
   }
 
   /**
+   * @brief Function to generate the throttle output value.
+   * @param None.
+   * @return throttle output value.
+   */
+
+  double throttleOutput() {
+  	//stub implementation
+  	return 0;
+  }
+
+  /**
    * @brief Function to set the setpoint values.
    * @param setpoint velocity and setpoint heading.
    * @return None.
    */
 
-  void pidController::setSetPoints(double setpointVelocity, double setpointHeading) {
-      double test1 = setpointVelocity;
+  void pidController::setSetPoints(double setpointSpeed, double setpointHeading) {
+      double test1 = setpointSpeed;
       double test2 = setpointHeading;
   }
 

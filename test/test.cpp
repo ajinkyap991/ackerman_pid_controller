@@ -17,8 +17,8 @@
  */
 
 TEST(controllerTest, controlFunctionTest1) {
-    pidController controller(1, 0, 0);
-    EXPECT_EQ(2, controller.compute(2));
+    pidController controller(1, 0, 0, 0);
+    EXPECT_EQ(2, controller.computeControlAction(2, 0));
 }
 
 
@@ -29,7 +29,7 @@ TEST(controllerTest, controlFunctionTest1) {
  */
 
 TEST(controllerTest, paramGetTest) {
-    pidController controller(2.7, 4.5, 6.3);
+    pidController controller(2.7, 4.5, 6.3, 1.0);
     EXPECT_EQ(2.7, controller.getKp());
     EXPECT_EQ(4.5, controller.getKd());
     EXPECT_EQ(6.3, controller.getKi());
@@ -41,7 +41,7 @@ TEST(controllerTest, paramGetTest) {
 * @param paramSetTest is the specific name to check the getControlParam function
 */
 TEST(controllerTest, paramSetTest) {
-    pidController controller(2.7, 4.5, 6.3);
+    pidController controller(2.7, 4.5, 6.3, 1.0);
 
     controller.setKp(5.6);
     controller.setKd(2.3);
@@ -55,33 +55,11 @@ TEST(controllerTest, paramSetTest) {
 /**
  * @brief This test checks if the control law works as expected
  * @param controllerTest is the name of the group of tests
- * @param getVeriableTest1 is the specific name to check the get veriable function
- */
-
-TEST(controllerTest, getVeriableTest1) {
-    pidController controller(1, 0, 0);
-    EXPECT_EQ(0, controller.getPreviousError());
-}
-
-/**
- * @brief This test checks if the control law works as expected
- * @param controllerTest is the name of the group of tests
- * @param getVeriableTest2 is the specific name to check the get veriable function
- */
-
-TEST(controllerTest, getVeriableTest2) {
-    pidController controller(1, 0, 0);
-    EXPECT_EQ(0, controller.getIntegralError());
-}
-
-/**
- * @brief This test checks if the control law works as expected
- * @param controllerTest is the name of the group of tests
  * @param getVeriableTest3 is the specific name to check the get veriable function
  */
 
 TEST(controllerTest, getVeriableTest3) {
-    pidController controller(1, 0, 0);
+    pidController controller(1, 0, 0, 0);
     EXPECT_EQ(0, controller.computeArcRadius());
 }
 
@@ -92,8 +70,8 @@ TEST(controllerTest, getVeriableTest3) {
  */
 
 TEST(controllerTest, getVeriableTest4) {
-    pidController controller(1, 0, 0);
-    EXPECT_EQ(0, controller.computeWheelVelocity());
+    pidController controller(1, 0, 0, 0);
+    EXPECT_EQ(0, controller.computeWheelSpeed());
 }
 
 /**
@@ -103,6 +81,6 @@ TEST(controllerTest, getVeriableTest4) {
  */
 
 TEST(controllerTest, getVeriableTest5) {
-    pidController controller(1, 0, 0);
+    pidController controller(1, 0, 0, 0);
     EXPECT_EQ(0, controller.computeSteeringAngle(0, 0, 0, 0));
 }
