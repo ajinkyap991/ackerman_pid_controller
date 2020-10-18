@@ -50,8 +50,9 @@ class pidController {
    * @return None.
    */
 
-  pidController(double kpValue, double kdValue, double kiValue, double kbValue,
-    double dtValue, double errorValue, double previousErrorValue, double integralErrorValue);
+  pidController(double kpValue, double kdValue, double kiValue,
+    double kbValue, double dtValue, double errorValue,
+    double previousErrorValue, double integralErrorValue);
 
   /**
    * @brief Function to compute the output of the PID controller.
@@ -113,7 +114,7 @@ class pidController {
 
   /**
    * @brief Function to set the error value of the PID controller
-   * @param error (for proportional error))
+   * @param error (for proportional gain error))
    * @return None.
    */
 
@@ -121,7 +122,7 @@ class pidController {
 
   /**
    * @brief Function to set the previous error of the PID controller
-   * @param previousError (for differential error)
+   * @param previousError (for differential gain error)
    * @return None.
    */
 
@@ -129,7 +130,7 @@ class pidController {
 
   /**
    * @brief Function to set the integral error of the PID controller
-   * @param integralError (for integral error)
+   * @param integralError (for integral gain error)
    * @return None.
    */
 
@@ -178,7 +179,7 @@ class pidController {
   /**
    * @brief Function to get the proportional error value of the PID controller
    * @param None
-   * @return error (for proportional error)
+   * @return error (for proportional gain error)
    */
 
   double getError();
@@ -186,7 +187,7 @@ class pidController {
   /**
    * @brief Function to get the previous error value of the PID controller
    * @param None
-   * @return previousError (for differential error)
+   * @return previousError (for differential gain error)
    */
 
   double getPreviousError();
@@ -194,7 +195,7 @@ class pidController {
   /**
    * @brief Function to get the integral error value of the PID controller
    * @param None
-   * @return integralError (for integral error)
+   * @return integralError (for integral gain error)
    */
 
   double getIntegralError();

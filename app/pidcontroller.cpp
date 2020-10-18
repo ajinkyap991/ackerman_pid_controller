@@ -54,8 +54,9 @@
    * @return None.
    */
 
-  pidController::pidController(double kpValue, double kdValue, double kiValue, double kbValue,
-    double dtValue, double errorValue, double previousErrorValue, double integralErrorValue) {
+  pidController::pidController(double kpValue, double kdValue, double kiValue,
+    double kbValue, double dtValue, double errorValue,
+    double previousErrorValue, double integralErrorValue) {
     kp = kpValue;
     kd = kdValue;
     ki = kiValue;
@@ -86,7 +87,7 @@
 
   void pidController::changeInTime(double newDt) {
     // stub implementation
-    std::cout<<newDt<<std::endl;
+    std::cout << newDt << std::endl;
   }
 
   /**
@@ -146,7 +147,7 @@
    */
 
   void pidController::setError(double errorIn) {
-  	error = errorIn;
+    error = errorIn;
   }
 
   /**
@@ -156,7 +157,7 @@
    */
 
   void pidController::setPreviousError(double previousErrorIn) {
-  	previousError = previousErrorIn;
+    previousError = previousErrorIn;
   }
 
   /**
@@ -166,7 +167,7 @@
    */
 
   void pidController::setIntegralError(double integralErrorIn) {
-  	integralError = integralErrorIn;
+    integralError = integralErrorIn;
   }
 
   /**
@@ -303,7 +304,7 @@
 
   void pidController::setSetPoints(double setpointSpeed,
     double setpointHeading) {
-      std::cout<<setpointSpeed<<" "<<setpointHeading<<std::endl;
+      std::cout << setpointSpeed << " " << setpointHeading << std::endl;
   }
 
   /**
