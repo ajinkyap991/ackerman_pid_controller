@@ -104,10 +104,10 @@ TEST(controllerTest, getVeriableTest5) {
 /**
  * @brief This test checks if the control law works as expected
  * @param controllerTest is the name of the group of tests
- * @param getVeriableTest5 is the specific name to check the get veriable function
+ * @param getVeriableTest6 is the specific name to check the get veriable function
  */
 
 TEST(controllerTest, getVeriableTest6) {
-    pidController controller(1, 0, 0, 0);
+    pidController controller;
     EXPECT_EQ(0, controller.throttleOutput());
 }
