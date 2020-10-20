@@ -23,10 +23,10 @@ Karan Sutradhar (Navigator)
 
 
 Ajinkiya Parwekar:
-A Design and Manufacturing Engineer in the AMAV (Autonomous Micro Aerial Vehicle) team working design and manufacturing of an automonous quadrotor. He is pursuing a Master's in Robotics from University of Maryland and expected to graduate by Fall 2021. He has professional experience of 1 year as an Automation test Engineer in a firm from India.
+A Research Assistant working to design and manufacture an automonous quadrotor with the AMAV (Autonomous Micro Aerial Vehicle) team. He is pursuing a Master's in Robotics from the University of Maryland and is expected to be graduated by Fall 2021. He has professional experience of one year as an Automation test Engineer from a firm in India. He is avid read of books (especially Novels). Apart from studies he enjoy playing badminton and solving Rubik's cube blindfolded.  
 
 Karan Sutradhar:
-A Research Assistant working with the Department of Mechanical Engineering, his research involves with developing Control Systems for operation under vacuum conditions. Also, he is a part of the AMAV (Autonomous Micro Aerial Vehicle) team working design and manufacturing of an automonous quadrotor. He is pursuing a Master's in Robotics from University of Maryland and expected to graduate by Fall 2021. He has professional experience of 3.4 years as an Industrial Robotics Engineer in two different firms from India.
+A Research Assistant working with the Department of Mechanical Engineering, his research involves building and developing Control Systems for thermal energy storage and their use in demand/response, energy trading. He is a part of the AMAV (Autonomous Micro Aerial Vehicle) team that builds the software for ARTag detection and Image segmentation in building of a automonous quadrotor. He is pursuing a Master's in Robotics from the University of Maryland and is expected to graduate by Fall 2021. He has professional experience of 3.4 years as an Industrial Robotics Engineer from two different firm in India. In his free time he enjoys playing traditional sports, swimming and he represented his country in the senior national football.
 
 
 
@@ -79,7 +79,7 @@ Cppcheck check
 cd <path to repository>
 cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem $( find . -name *.cpp | grep -vE -e "^./build/" -e "^./vendor/" )
 
-``
+```
 
 ## Doxygen File generation
 ```
