@@ -4,7 +4,6 @@
  * @author Karan Sutradhar
  * @brief Definition of a PID Controller for Ackerman Steering Mechanism
  * It uses controller gain values and returns output value based on setpoint and feedback values.
- *
  * @Copyright "Copyright 2020" <Ajinkya Parwekar>
  * @Copyright "Copyright 2020" <Karan Sutradhar>
  */
@@ -14,6 +13,8 @@
 #include <iostream>
 #include <string>
 
+
+// Declaring class definition
 class pidController {
  private:
   double kp, kd, ki, kb, error, previousError, integralError, dt;
@@ -74,11 +75,11 @@ class pidController {
 
   /**
    * @brief Function to set the proportional gain variable of the PID controller
-   * @param kp (Proportional gain)
+   * @param kpIn (Proportional gain)
    * @return None.
    */
 
-  void setKp(double);
+  void setKp(double kdIn);
 
   /**
    * @brief Function to set the differential gain variable of the PID controller

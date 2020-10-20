@@ -11,13 +11,21 @@
 
 #include "pidcontroller.hpp"
 
-/**
+  /**
    * @brief Base Constructor for the PID Controller class.
    * @param None.
    * @return None.
    */
 
   pidController::pidController() {
+    kp = 1;
+    kd = 0;
+    ki = 0;
+    dt = 0;
+    kb = 0;
+    error = 0;
+    previousError = 0;
+    integralError = 0;
   }
 
   /**

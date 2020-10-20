@@ -10,8 +10,15 @@
 
 #include "pidcontroller.hpp"
 
+/**
+ * @brief main function of the program.
+ * @param None.
+ * @return 0.
+ */
+
 int main() {
-    // Initialising Constructor: stub implementation
+    // Initialising Constructor (creating an object of the class)
+    // stub implementation
     pidController controller(1, 0, 0, 0, 0, 0, 0, 0);
 
     // Calling all unused functions: stub implementation
