@@ -23,7 +23,7 @@ Karan Sutradhar (Navigator)
 
 
 Ajinkiya Parwekar:
-A Research Assistant working to design and manufacture an automonous quadrotor with the AMAV (Autonomous Micro Aerial Vehicle) team. He is pursuing a Master's in Robotics from the University of Maryland and is expected to be graduated by Fall 2021. He has professional experience of one year as an Automation test Engineer from a firm in India. He is avid read of books (especially Novels). Apart from studies he enjoy playing badminton and solving Rubik's cube blindfolded.  
+A Research Assistant working to design and manufacture an automonous quadrotor with the AMAV (Autonomous Micro Aerial Vehicle) team. He is pursuing a Master's in Robotics from the University of Maryland and is expected to be graduated by Fall 2021. He has professional experience of one year as an Automation test Engineer from a firm in India. He is avid reader of books (especially Novels). Apart from studies he enjoys playing badminton and solving Rubik's cube blindfolded.  
 
 Karan Sutradhar:
 A Research Assistant working with the Department of Mechanical Engineering, his research involves building and developing Control Systems for thermal energy storage and their use in demand/response, energy trading. He is a part of the AMAV (Autonomous Micro Aerial Vehicle) team that builds the software for ARTag detection and Image segmentation in building of a automonous quadrotor. He is pursuing a Master's in Robotics from the University of Maryland and is expected to graduate by Fall 2021. He has professional experience of 3.4 years as an Industrial Robotics Engineer from two different firm in India. In his free time he enjoys playing traditional sports, swimming and he represented his country in the senior national football.
@@ -32,10 +32,10 @@ A Research Assistant working with the Department of Mechanical Engineering, his 
 
 ## Agile Iterative Process
 
-[Agile Iterative Process Google Spreadsheet] (https://docs.google.com/spreadsheets/d/1h2nwnI-me5BiQL5BhDgtjJHhiWp_mYoPdVkZe6hzyFI/edit?usp=sharing)
+[Agile Iterative Process Google Spreadsheet](https://docs.google.com/spreadsheets/d/1h2nwnI-me5BiQL5BhDgtjJHhiWp_mYoPdVkZe6hzyFI/edit?usp=sharing)
 
 ## Sprint Planning Notes
-[Sprint Planning Notes Google Document] (https://docs.google.com/document/d/1I3oo1O6Uo4DJCLdgcUL5v5L1ioNQ-vy0LTcZkPlc0Hs/edit?usp=sharing)
+[Sprint Planning Notes Google Document](https://docs.google.com/document/d/1I3oo1O6Uo4DJCLdgcUL5v5L1ioNQ-vy0LTcZkPlc0Hs/edit?usp=sharing)
 
 ## License
 
