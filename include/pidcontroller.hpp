@@ -1,10 +1,9 @@
 /**
  * @file pid.hpp
- * @author Ajinkya Parwekar
- * @author Karan Sutradhar
+ * @author Karan Sutradhar: Driver
+ * @author Ajinkya Parwekar: Navigator
  * @brief Definition of a PID Controller for Ackerman Steering Mechanism
  * It uses controller gain values and returns output value based on setpoint and feedback values.
- *
  * @Copyright "Copyright 2020" <Ajinkya Parwekar>
  * @Copyright "Copyright 2020" <Karan Sutradhar>
  */
@@ -12,11 +11,34 @@
 #pragma once
 
 #include <iostream>
+#include <chrono>
+#include <math.h>
 #include <string>
+#include <vector>
+#define OUTMIN -1e6     // default minimum saturation value
+#define OUTMAX 1e6    // default maximum saturation value
 
+
+// Declaring class definition
 class pidController {
  private:
-  double kp, ki, kd, error, previousError, integralError, dt;
+  double kp, kd, ki, kb, errorSum, previousError, integralError, dt;
+  double setpoint;
+  bool dtMode, firstRunFlag;
+  std::chrono::system_clock::time_point prevTime;
+  double baseline, carLen, arcRadius, rWheelVel, lWheelVel,
+    steeringAngle, setpointSpeed, setpointHeading;
+  double dtSim, posX, posY, updatedHeading;
+  double leftWheelSpeed, rightWheelSpeed;
+  double n;
+  uint32_t t;
+  uint8_t antiWindUp;
+  std::vector<double> vectorOutput;
+  double outMin, outMax;
+  double backCalcOld = 0.0;
+  double kf, CnP, CnI, CnD;
+  double tSec;
+  double x, a, b, min, max;
 
  public:
   /**
@@ -24,16 +46,37 @@ class pidController {
    * @param None.
    * @return None.
    */
+
   pidController();
 
   /**
-   * @brief Constructor for PID controller class with three gain parameters.
-   * @param kp Proportional Gain of PID controller.
-   * @param kd Differential Gain of PID controller.
-   * @param ki Integral Gain of PID controller.
+   * @brief Constructor for PID controller class with three gain parameters and time variable.
+   * @param kpValue Proportional Gain of PID controller.
+   * @param kdValue Differential Gain of PID controller.
+   * @param kiValue Integral Gain of PID controller.
+   * @param dtValue time variable for controller.
    * @return None.
    */
-  pidController(double kp, double kd, double ki);
+
+  pidController(double kpValue, double kdValue, double kiValue,
+    double dtValue, bool dtMode);
+
+  /**
+   * @brief Constructor for PID controller class with all private attributes.
+   * @param kpValue Proportional Gain of PID controller.
+   * @param kdValue Differential Gain of PID controller.
+   * @param kiValue Integral Gain of PID controller.
+   * @param kbValue Variable for back calculation to eliminate windup.
+   * @param dtValue time variable for controller.
+   * @param errorvalue error value for proportional gain.
+   * @param previousErrorValue error value for differential gain.
+   * @param integralErrorValue error value for integral gain.
+   * @return None.
+   */
+
+  pidController(double kpValue, double kdValue, double kiValue,
+    double kbValue, double dtValue, double errorValue,
+    double previousErrorValue, double integralErrorValue);
 
   /**
    * @brief Function to compute the output of the PID controller.
@@ -42,15 +85,16 @@ class pidController {
    * @return controlAction Output calculated by the PID controller using the gain values.
    */
 
-  double compute(double feedback);
+  double computeControlAction(double feedback);
+
 
   /**
    * @brief Function to set the proportional gain variable of the PID controller
-   * @param kp (Proportional gain)
+   * @param kpIn (Proportional gain)
    * @return None.
    */
 
-  void setKp(double);
+  void setKp(double kdIn);
 
   /**
    * @brief Function to set the differential gain variable of the PID controller
@@ -69,12 +113,52 @@ class pidController {
   void setKi(double);
 
   /**
+   * @brief Function to set the back calculation variable of the PID controller
+   * @param kb (for back calculation)
+   * @return None.
+   */
+
+  void setKb(double);
+
+  /**
    * @brief Function to set the time variable of the PID controller
    * @param dt (time variable)
    * @return None.
    */
 
   void setDt(double);
+
+  /**
+   * @brief Function to set the error value of the PID controller
+   * @param error (for proportional gain error))
+   * @return None.
+   */
+
+  void setError(double);
+
+  /**
+   * @brief Function to set the previous error of the PID controller
+   * @param previousError (for differential gain error)
+   * @return None.
+   */
+
+  void setPreviousError(double);
+
+  /**
+   * @brief Function to set the integral error of the PID controller
+   * @param integralError (for integral gain error)
+   * @return None.
+   */
+
+  void setIntegralError(double);
+
+  /**
+   * @brief Function to set the setpoint value of the PID controller
+   * @param setpoint
+   * @return None.
+   */
+
+  void setSp(double);
 
   /**
    * @brief Function to get the proportional gain variable of the PID controller
@@ -101,6 +185,14 @@ class pidController {
   double getKi();
 
   /**
+   * @brief Function to get the back calculation variable of the PID controller
+   * @param None
+   * @return kb (for back calculation)
+   */
+
+  double getKb();
+
+  /**
    * @brief Function to get the time variable value of the PID controller
    * @param None
    * @return dt (time variable)
@@ -109,20 +201,36 @@ class pidController {
   double getDt();
 
   /**
-   * @brief Function to return the previous error value (for test suite)
-   * @param None.
-   * @return Previous error value(previousError).
+   * @brief Function to get the proportional error value of the PID controller
+   * @param None
+   * @return error (for proportional gain error)
+   */
+
+  double getError();
+
+  /**
+   * @brief Function to get the previous error value of the PID controller
+   * @param None
+   * @return previousError (for differential gain error)
    */
 
   double getPreviousError();
 
   /**
-   * @brief Function to return the integral error value (for test suite)
-   * @param None.
-   * @return Integral error value(integralError).
+   * @brief Function to get the integral error value of the PID controller
+   * @param None
+   * @return integralError (for integral gain error)
    */
 
   double getIntegralError();
+
+  /**
+   * @brief Function to get the setpoint value of the PID controller
+   * @param None
+   * @return setpoint value
+   */
+
+  double getSp();
 
   /**
    * @brief Function to compute the arc radius of the wheel from rotation point.
@@ -130,37 +238,75 @@ class pidController {
    * @return arc radius.
    */
 
-  double computeArcRadius();
+  void computeArcRadius();
 
   /**
    * @brief Function to compute the wheel velocities of both wheels.
    * @param None.
-   * @return wheel velocity.
+   * @return wheel speed.
    */
 
-  double computeWheelVelocity();
+  void computeWheelSpeed();
 
   /**
    * @brief Function to compute the steering angle for the wheel from rotation point.
-   * @param steering angle, velocity of right wheel, velocity of left wheel and heading output.
+   * @param steering angle, speed of right wheel, speed of left wheel and heading output.
    * @return steering angle.
    */
 
-  double computeSteeringAngle(double steeringAngle, double rightWheelVelocity, double leftWheelVelocity, double headingOutput);
+  void computePIDParameters(double *steeringAngle, double *headingOutput,
+    double *rightWheelSpeed, double *leftWheelSpeed);
+
+  /**
+   * @brief Function to generate the throttle output value.
+   * @param None.
+   * @return throttle output value.
+   */
+
+  double throttleOutput(double throttle);
 
   /**
    * @brief Function to set the setpoint values.
-   * @param setpoint velocity and setpoint heading.
+   * @param setpoint speed and setpoint heading.
    * @return None.
    */
 
-  void setSetPoints(double setpointVelocity, double setpointHeading);
+  void setSetPoints(double setpointSpeed, double setpointHeading);
 
   /**
-   * Destructor for PID controller
+   * @brief Function to reset the error values.
    * @param None.
    * @return None.
    */
+
+  void reset();
+
+  /**
+   * @brief Function to constrain a value within a range.
+   * @param x (value to be constrained), a (min value), b (max value).
+   * @return constrained value.
+   */
+
+  double constraints(double x, double a, double b);
+
+  /**
+   * @brief Function to set the saturation between limits.
+   * @param min (min value), max (max value).
+   * @return None.
+   */
+
+  void SetSaturation(double min, double max);
+
+  /**
+   * @brief Function to compute the position values of the vehicle.
+   * @param steeringAngle, rightWheelSpeed, leftWheelSpeed, posX, posY, 
+   * @param updateHeading and car length.
+   * @return None.
+   */
+
+  void compute(double *steerAng, double *rightWheelSpeed,
+    double *leftWheelSpeed, double *posX,
+    double *posY, double *updateHeading, double carLen);
 
   // ~pidController();
 };
