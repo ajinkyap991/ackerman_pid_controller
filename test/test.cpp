@@ -1,8 +1,8 @@
 /**
  * @file test.cpp
- * @author Ajinkya Parwekar: Driver
- * @author Karan Sutradhar: Navigator
- * @brief Test code functions for PID controller using gtest
+ * @author Karan Sutradhar: Driver
+ * @author Ajinkya Parwekar: Navigator
+ * @brief Test code functions for PID obj using gtest
  * @Copyright "Copyright 2020" <Ajinkya Parwekar>
  * @Copyright "Copyright 2020" <Karan Sutradhar>
  */
@@ -12,102 +12,70 @@
 
 /**
  * @brief This test checks if the control law works as expected
- * @param controllerTest is the name of the group of tests
+ * @param objTest is the name of the group of tests
  * @param controlFunctionTest1 is the specific name to check the control function
  */
 
-TEST(controllerTest, controlFunctionTest1) {
-    pidController controller(1, 0, 0, 0, 0, 0, 0, 0);
-    EXPECT_EQ(2, controller.computeControlAction(2, 0));
+TEST(objTest, controlFunctionTest1) {
+    pidController obj(2.7, 4.5, 6.3, 1.0, false);
+    EXPECT_EQ(5.4, obj.computeControlAction(2));
 }
 
-
 /**
- * @brief This test checks if the controller has properly stored its parameters
- * @param controllerTest is the name of the group of tests
+ * @brief This test checks if the obj has properly stored its parameters
+ * @param objTest is the name of the group of tests
  * @param paramGetTest is the specific name to check the getControlParam function
  */
 
-TEST(controllerTest, paramGetTest) {
-    pidController controller(2.7, 4.5, 6.3, 1.0, 1.0, 1.0, 1.0, 1.0);
-    EXPECT_EQ(2.7, controller.getKp());
-    EXPECT_EQ(4.5, controller.getKd());
-    EXPECT_EQ(6.3, controller.getKi());
-    EXPECT_EQ(1.0, controller.getKb());
-    EXPECT_EQ(1.0, controller.getDt());
-    EXPECT_EQ(1.0, controller.getError());
-    EXPECT_EQ(1.0, controller.getPreviousError());
-    EXPECT_EQ(1.0, controller.getIntegralError());
+TEST(objTest, paramGetTest) {
+    pidController obj(2.7, 4.5, 6.3, 1.0, true);
+    EXPECT_EQ(2.7, obj.getKp());
+    EXPECT_EQ(4.5, obj.getKd());
+    EXPECT_EQ(6.3, obj.getKi());
+    EXPECT_EQ(0.0, obj.getKb());
+    EXPECT_EQ(1.0, obj.getDt());
+    EXPECT_EQ(0.0, obj.getError());
+    EXPECT_EQ(0.0, obj.getPreviousError());
+    EXPECT_EQ(0.0, obj.getIntegralError());
 }
 
 /**
-* @brief This test checks if the controller can change the inherent parameters
-* @param controllerTest is the name of the group of tests
+* @brief This test checks if the obj can change the inherent parameters
+* @param objTest is the name of the group of tests
 * @param paramSetTest is the specific name to check the getControlParam function
 */
 
-TEST(controllerTest, paramSetTest) {
-    pidController controller(2.7, 4.5, 6.3, 1.0, 1.0, 1.0, 1.0, 1.0);
+TEST(objTest, paramSetTest) {
+    pidController obj(2.7, 4.5, 6.3, 1.0, 1.0, 1.0, 1.0, 1.0);
 
-    controller.setKp(5.6);
-    controller.setKd(2.3);
-    controller.setKi(3.6);
-    controller.setKb(4.5);
-    controller.setDt(2.0);
-    controller.setError(5.9);
-    controller.setPreviousError(6.2);
-    controller.setIntegralError(5.3);
-
-    EXPECT_EQ(5.6, controller.getKp());
-    EXPECT_EQ(2.3, controller.getKd());
-    EXPECT_EQ(3.6, controller.getKi());
-    EXPECT_EQ(4.5, controller.getKb());
-    EXPECT_EQ(2.0, controller.getDt());
-    EXPECT_EQ(5.9, controller.getError());
-    EXPECT_EQ(6.2, controller.getPreviousError());
-    EXPECT_EQ(5.3, controller.getIntegralError());
+    obj.setKp(5.6);
+    obj.setKd(2.3);
+    obj.setKi(3.6);
+    obj.setKb(4.5);
+    obj.setDt(2.0);
+    obj.setError(5.9);
+    obj.setPreviousError(6.2);
+    obj.setIntegralError(5.3);
+    obj.setSp(2.2);
+    EXPECT_EQ(5.6, obj.getKp());
+    EXPECT_EQ(2.3, obj.getKd());
+    EXPECT_EQ(3.6, obj.getKi());
+    EXPECT_EQ(0.0, obj.getKb());
+    EXPECT_EQ(2.0, obj.getDt());
+    EXPECT_EQ(5.9, obj.getError());
+    EXPECT_EQ(6.2, obj.getPreviousError());
+    EXPECT_EQ(5.3, obj.getIntegralError());
+    EXPECT_EQ(2.2, obj.getSp());
 }
 
 /**
- * @brief This test checks if the control law works as expected
- * @param controllerTest is the name of the group of tests
- * @param getVeriableTest3 is the specific name to check the computeArcRadius function
- */
+* @brief This test covers the various void functions of the program
+* @param objTest is the name of the group of tests
+* @param unitTest1 is the specific name to check the void functions
+*/
 
-TEST(controllerTest, getVeriableTest3) {
-    pidController controller(1, 0, 0, 0);
-    EXPECT_EQ(0, controller.computeArcRadius());
-}
-
-/**
- * @brief This test checks if the control law works as expected
- * @param controllerTest is the name of the group of tests
- * @param getVeriableTest4 is the specific name to check the get veriable function
- */
-
-TEST(controllerTest, getVeriableTest4) {
-    pidController controller(1, 0, 0, 0);
-    EXPECT_EQ(0, controller.computeWheelSpeed());
-}
-
-/**
- * @brief This test checks if the control law works as expected
- * @param controllerTest is the name of the group of tests
- * @param getVeriableTest5 is the specific name to check the get veriable function
- */
-
-TEST(controllerTest, getVeriableTest5) {
-    pidController controller(1, 0, 0, 0);
-    EXPECT_EQ(0, controller.computeSteeringAngle(0, 0, 0, 0));
-}
-
-/**
- * @brief This test checks if the control law works as expected
- * @param controllerTest is the name of the group of tests
- * @param getVeriableTest6 is the specific name to check the get veriable function
- */
-
-TEST(controllerTest, getVeriableTest6) {
-    pidController controller;
-    EXPECT_EQ(0, controller.throttleOutput());
+TEST(objTest, unitTest1) {
+    pidController obj;
+    obj.reset();
+    EXPECT_EQ(0.8, obj.throttleOutput(0.8));
 }

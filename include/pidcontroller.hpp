@@ -1,7 +1,7 @@
 /**
  * @file pid.hpp
- * @author Ajinkya Parwekar
- * @author Karan Sutradhar
+ * @author Karan Sutradhar: Driver
+ * @author Ajinkya Parwekar: Navigator
  * @brief Definition of a PID Controller for Ackerman Steering Mechanism
  * It uses controller gain values and returns output value based on setpoint and feedback values.
  * @Copyright "Copyright 2020" <Ajinkya Parwekar>
@@ -12,12 +12,33 @@
 
 #include <iostream>
 #include <string>
+#include <math.h>
+#include <vector>
+#include <chrono>
+#include <vector>
+#define OUTMIN -1e6     // default minimum saturation value
+#define OUTMAX 1e6    // default maximum saturation value
 
 
 // Declaring class definition
 class pidController {
  private:
-  double kp, kd, ki, kb, error, previousError, integralError, dt;
+  double kp, kd, ki, kb, errorSum, previousError, integralError, dt;
+  double setpoint;
+  bool dtMode, firstRunFlag;
+  std::chrono::system_clock::time_point prevTime;
+  double baseline, carLen, arcRadius, rWheelVel, lWheelVel, steeringAngle, setpointSpeed, setpointHeading;
+  double dtSim, posX, posY, updatedHeading;
+  double leftWheelSpeed, rightWheelSpeed;
+  double n;
+  uint32_t t;
+  uint8_t antiWindUp;
+  std::vector<double> vectorOutput;
+  double outMin, outMax;
+  double backCalcOld = 0.0;
+  double kf, CnP, CnI, CnD;
+  double tSec;
+  double x, a, b, min, max;
 
  public:
   /**
@@ -25,6 +46,7 @@ class pidController {
    * @param None.
    * @return None.
    */
+
   pidController();
 
   /**
@@ -36,7 +58,7 @@ class pidController {
    * @return None.
    */
 
-  pidController(double kpValue, double kdValue, double kiValue, double dtValue);
+  pidController(double kpValue, double kdValue, double kiValue, double dtValue, bool dtMode);
 
   /**
    * @brief Constructor for PID controller class with all private attributes.
@@ -62,15 +84,7 @@ class pidController {
    * @return controlAction Output calculated by the PID controller using the gain values.
    */
 
-  double computeControlAction(double feedback, double setpoint);
-
-  /**
-   * @brief Function to change the time value.
-   * @param newDt (new time value).
-   * @return None.
-   */
-
-  void changeInTime(double newDt);
+  double computeControlAction(double feedback);
 
 
   /**
@@ -138,6 +152,14 @@ class pidController {
   void setIntegralError(double);
 
   /**
+   * @brief Function to set the setpoint value of the PID controller
+   * @param setpoint
+   * @return None.
+   */
+
+  void setSp(double);
+
+  /**
    * @brief Function to get the proportional gain variable of the PID controller
    * @param None
    * @return kp (Proportional gain)
@@ -202,29 +224,37 @@ class pidController {
   double getIntegralError();
 
   /**
+   * @brief Function to get the setpoint value of the PID controller
+   * @param None
+   * @return setpoint value
+   */
+
+  double getSp();
+
+  /**
    * @brief Function to compute the arc radius of the wheel from rotation point.
    * @param None.
    * @return arc radius.
    */
 
-  double computeArcRadius();
+  void computeArcRadius();
 
   /**
    * @brief Function to compute the wheel velocities of both wheels.
    * @param None.
-   * @return wheel velocity.
+   * @return wheel speed.
    */
 
-  double computeWheelSpeed();
+  void computeWheelSpeed();
 
   /**
    * @brief Function to compute the steering angle for the wheel from rotation point.
-   * @param steering angle, velocity of right wheel, velocity of left wheel and heading output.
+   * @param steering angle, speed of right wheel, speed of left wheel and heading output.
    * @return steering angle.
    */
 
-  double computeSteeringAngle(double steeringAngle, double rightWheelSpeed,
-    double leftWheelSpeed, double compassHeadingOutput);
+  void computePIDParameters(double *steeringAngle, double *rightWheelSpeed,
+    double *leftWheelSpeed, double *compassHeadingOutput);
 
   /**
    * @brief Function to generate the throttle output value.
@@ -232,21 +262,49 @@ class pidController {
    * @return throttle output value.
    */
 
-  double throttleOutput();
+  double throttleOutput(double throttle);
 
   /**
    * @brief Function to set the setpoint values.
-   * @param setpoint velocity and setpoint heading.
+   * @param setpoint speed and setpoint heading.
    * @return None.
    */
 
   void setSetPoints(double setpointSpeed, double setpointHeading);
 
   /**
-   * Destructor for PID controller
+   * @brief Function to reset the error values.
    * @param None.
    * @return None.
    */
+
+  void reset();
+
+  /**
+   * @brief Function to constrain a value within a range.
+   * @param x (value to be constrained), a (min value), b (max value).
+   * @return constrained value.
+   */
+
+  double constraints(double x, double a, double b);
+
+  /**
+   * @brief Function to set the saturation between limits.
+   * @param min (min value), max (max value).
+   * @return None.
+   */
+
+  void SetSaturation(double min, double max);
+
+  /**
+   * @brief Function to compute the position values of the vehicle.
+   * @param steeringAngle, rightWheelSpeed, leftWheelSpeed, posX, posY, 
+   * @param updateHeading and car length.
+   * @return None.
+   */
+
+  void compute(double *steerAng, double *rightWheelSpeed, double *leftWheelSpeed, double *posX,
+    double *posY, double *updateHeading, double carLen);
 
   // ~pidController();
 };
