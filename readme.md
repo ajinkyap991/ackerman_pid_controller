@@ -35,7 +35,9 @@ A Research Assistant working with the Department of Mechanical Engineering, his 
 [Agile Iterative Process Google Spreadsheet](https://docs.google.com/spreadsheets/d/1h2nwnI-me5BiQL5BhDgtjJHhiWp_mYoPdVkZe6hzyFI/edit?usp=sharing)
 
 ## Sprint Planning Notes
-[Sprint Planning Notes Google Document](https://docs.google.com/document/d/1I3oo1O6Uo4DJCLdgcUL5v5L1ioNQ-vy0LTcZkPlc0Hs/edit?usp=sharing)
+[Sprint Planning Notes For Iteration 1](https://docs.google.com/document/d/1I3oo1O6Uo4DJCLdgcUL5v5L1ioNQ-vy0LTcZkPlc0Hs/edit?usp=sharing)
+
+[Sprint Planning Notes For Iteration 2](https://docs.google.com/document/d/1I1ZMmugRXw0pq8niMBT0wEArmI_0nNvSu69mTJZ4-fw/edit?usp=sharing)
 
 ## License
 
