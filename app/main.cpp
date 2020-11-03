@@ -45,16 +45,16 @@ int main() {
 
   // Getting final output values
   for (int z = 1; z < number_of_iterations; z++) {
-    std::cout << "Simulation Iteration Number: \t" << z << std::endl;
+    std::cout << "Simulation Iteration Number: " << z << std::endl;
     // computing vehicle position
     obj.compute(steerptr, lSpeedptr, rSpeedptr, posXptr, posYptr, headingptr,
                    carLen);
-    std::cout << "Current Heading: " << *headingptr
-              << ", Current X Position: " << *posXptr
-              << ", Current Y Position: " << *posYptr << std::endl;
+    std::cout << "Current Heading: " << *headingptr << std::endl
+              << "Current X Position: " << *posXptr << std::endl
+              << "Current Y Position: " << *posYptr << std::endl;
     // computing steering angle of the vehicle
     obj.computePIDParameters(steerptr, headingptr, rSpeedptr, lSpeedptr);
-    std::cout << "Steering angle PID output: " << *steerptr << std::endl
+    std::cout << "Steering angle PID output in degrees: " << *steerptr << std::endl
               << std::endl;
   }
   return 0;
