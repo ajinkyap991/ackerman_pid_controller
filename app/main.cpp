@@ -19,7 +19,8 @@
 int main() {
   double kp = -12, ki = 0, kd = 0, carLen = 1;
 
-  // Heading and velocity to be achieved. Heading should be between -3.14 and +3.14
+  // Heading and velocity to be achieved.
+  // Heading should be between -3.14 and +3.14
   double headingSp = 2, velSp = 1;
   double number_of_iterations = 25;
   double simulationTime = 0.05;

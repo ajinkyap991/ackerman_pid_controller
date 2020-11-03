@@ -11,10 +11,9 @@
 #pragma once
 
 #include <iostream>
-#include <string>
-#include <math.h>
-#include <vector>
 #include <chrono>
+#include <math.h>
+#include <string>
 #include <vector>
 #define OUTMIN -1e6     // default minimum saturation value
 #define OUTMAX 1e6    // default maximum saturation value
@@ -27,7 +26,8 @@ class pidController {
   double setpoint;
   bool dtMode, firstRunFlag;
   std::chrono::system_clock::time_point prevTime;
-  double baseline, carLen, arcRadius, rWheelVel, lWheelVel, steeringAngle, setpointSpeed, setpointHeading;
+  double baseline, carLen, arcRadius, rWheelVel, lWheelVel,
+    steeringAngle, setpointSpeed, setpointHeading;
   double dtSim, posX, posY, updatedHeading;
   double leftWheelSpeed, rightWheelSpeed;
   double n;
@@ -58,7 +58,8 @@ class pidController {
    * @return None.
    */
 
-  pidController(double kpValue, double kdValue, double kiValue, double dtValue, bool dtMode);
+  pidController(double kpValue, double kdValue, double kiValue,
+    double dtValue, bool dtMode);
 
   /**
    * @brief Constructor for PID controller class with all private attributes.
@@ -253,8 +254,8 @@ class pidController {
    * @return steering angle.
    */
 
-  void computePIDParameters(double *steeringAngle, double *rightWheelSpeed,
-    double *leftWheelSpeed, double *compassHeadingOutput);
+  void computePIDParameters(double *steeringAngle, double *headingOutput,
+    double *rightWheelSpeed, double *leftWheelSpeed);
 
   /**
    * @brief Function to generate the throttle output value.
@@ -303,7 +304,8 @@ class pidController {
    * @return None.
    */
 
-  void compute(double *steerAng, double *rightWheelSpeed, double *leftWheelSpeed, double *posX,
+  void compute(double *steerAng, double *rightWheelSpeed,
+    double *leftWheelSpeed, double *posX,
     double *posY, double *updateHeading, double carLen);
 
   // ~pidController();

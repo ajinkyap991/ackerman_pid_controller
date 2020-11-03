@@ -48,12 +48,12 @@
     CnI = 0.0;
     CnD = 0.0;
     tSec = t / 1e3;
-    std::vector<double> vectorOutput;
     x = 0.0;
     a = 0.0;
     b = 0.0;
     min = 0.0;
     max = 0.0;
+    n = 0.0, t = 0.0, kf = 0.0, CnP = 0.0, outMin = 0.0, outMax = 0.0;
   }
 
   /**
@@ -98,12 +98,12 @@
     CnI = 0.0;
     CnD = 0.0;
     tSec = t / 1e3;
-    std::vector<double> vectorOutput;
     x = 0.0;
     a = 0.0;
     b = 0.0;
     min = 0.0;
     max = 0.0;
+    n = 0.0, t = 0.0, kf = 0.0, CnP = 0.0, outMin = 0.0, outMax = 0.0;
   }
 
   /**
@@ -152,12 +152,12 @@
     CnI = 0.0;
     CnD = 0.0;
     tSec = t / 1e3;
-    std::vector<double> vectorOutput;
     x = 0.0;
     a = 0.0;
     b = 0.0;
     min = 0.0;
     max = 0.0;
+    n = 0.0, t = 0.0, kf = 0.0, CnP = 0.0, outMin = 0.0, outMax = 0.0;
   }
 
   /**
@@ -168,7 +168,8 @@
    */
 
   double pidController::computeControlAction(double feedback) {
-    // calculating error values of current error, sum of error and previous error
+    // calculating error values of current error,
+    // sum of error and previous error
     double currentError, output, futureError;
     currentError = feedback - setpoint;
     errorSum += currentError;
@@ -205,11 +206,11 @@
       CnI += ki * (currentError + previousError);
       CnD = kf * CnD + kd * (currentError - previousError);
       double u = CnP + CnI + CnD;
-      double backCalc = constraints (u, outMin, outMax) - u;
+      double backCalc = constraints(u, outMin, outMax) - u;
       CnI += kb * (backCalc + backCalcOld);
     previousError = currentError;
     backCalcOld = backCalc;
-    output = constraints ((CnP + CnI + CnD), outMin, outMax);
+    output = constraints((CnP + CnI + CnD), outMin, outMax);
   }
   return output;
   }
@@ -251,10 +252,9 @@
    */
 
   void pidController::setKb(double kbIn) {
-  if((antiWindUp == 1) && (ki != 0)) {
+  if ((antiWindUp == 1) && (ki != 0)) {
     kb = 0.5 * kbIn * tSec;
-  }
-  else {
+  } else {
     kb = 0;
   }
   }
@@ -406,7 +406,7 @@
    */
 
   void pidController::computeArcRadius() {
-    arcRadius = carLen * (tan ((3.14/2) - steeringAngle));
+    arcRadius = carLen * (tan((3.14/2) - steeringAngle));
   }
 
   /**
@@ -416,8 +416,8 @@
    */
 
   void pidController::computeWheelSpeed() {
-    leftWheelSpeed = setpointSpeed * ( 1 - (baseline / 2 * arcRadius));
-    rightWheelSpeed = setpointSpeed * ( 1 + (baseline / 2 * arcRadius));
+    leftWheelSpeed = setpointSpeed * (1 - (baseline / 2 * arcRadius));
+    rightWheelSpeed = setpointSpeed * (1 + (baseline / 2 * arcRadius));
   }
 
   /**
@@ -426,8 +426,8 @@
    * @return steering angle.
    */
 
-  void pidController::computePIDParameters(double *steeringAngle, double *headingOutput,
-    double *rightWheelSpeed, double *leftWheelSpeed) {
+  void pidController::computePIDParameters(double *steeringAngle,
+    double *headingOutput, double *rightWheelSpeed, double *leftWheelSpeed) {
       *steeringAngle = pidController::steeringAngle;
       // calling the computeControlAction to get the steering angle value
       pidController::steeringAngle = computeControlAction(*headingOutput);
@@ -436,8 +436,10 @@
       // computing the wheel speeds
       computeWheelSpeed();
       // printing the wheel speeds
-      std::cout<< "The speed of the right wheel is: " << *rightWheelSpeed << std::endl;
-      std::cout<< "The speed of the left wheel is: " << *leftWheelSpeed << std::endl;
+      std::cout<< "The speed of the right wheel is: "
+      << *rightWheelSpeed << std::endl;
+      std::cout<< "The speed of the left wheel is: "
+      << *leftWheelSpeed << std::endl;
   }
 
   /**
@@ -447,10 +449,9 @@
    */
 
   double pidController::throttleOutput(double throttle) {
-    if (throttle > 1 || throttle < 0){
+    if (throttle > 1 || throttle < 0) {
       return 0.5;
-    }
-    else{
+    } else {
       return throttle;
     }
   }
@@ -474,7 +475,7 @@
    * @return None.
    */
 
-  void pidController::reset(){
+  void pidController::reset() {
     // resetting the error values
     errorSum = 0;
     previousError = 0;
@@ -490,7 +491,7 @@
    * @return constrained value.
    */
 
-  double pidController::constraints(double x, double a, double b){
+  double pidController::constraints(double x, double a, double b) {
     if (x > b)
       return b;
     if (x < a)
@@ -505,11 +506,12 @@
    * @return None.
    */
 
-  void pidController::SetSaturation(double min, double max){
-   if(min >= max) return;
-   outMin = min;
-   outMax = max;
- }
+  void pidController::SetSaturation(double min, double max) {
+    if (min >= max)
+      return;
+    outMin = min;
+    outMax = max;
+  }
 
   /**
    * @brief Function to compute the position values of the vehicle.
@@ -518,14 +520,14 @@
    * @return None.
    */
 
-  void pidController::compute(double *steeringAngle, double *rightWheelSpeed, double *leftWheelSpeed, double *posX,
+  void pidController::compute(double *steeringAngle, double *rightWheelSpeed,
+    double *leftWheelSpeed, double *posX,
     double *posY, double *updateHeading, double carLen) {
   // vehicle center velocity
   double vehVel = (*rightWheelSpeed + *leftWheelSpeed) / 2 * carLen;
   if (*steeringAngle > (3.14 / 4)) {
     *steeringAngle = 3.14 / 4;
-  }
-  else if (*steeringAngle < (-3.14 / 4)) {
+  } else if (*steeringAngle < (-3.14 / 4)) {
     *steeringAngle = -3.14 / 4;
   }
   if (*steeringAngle != 0) {
