@@ -14,9 +14,9 @@ Results and Performances to be included after the implementation.
 ## Authors
 
 Midterm Phase I
- 
-Ajinkya Parwekar (Driver)
-Karan Sutradhar (Navigator)
+
+Karan Sutradhar (Driver)
+Ajinkya Parwekar (Navigator)
 
 
 ## Personal Description
