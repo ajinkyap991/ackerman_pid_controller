@@ -8,6 +8,9 @@
  * @Copyright "Copyright 2020" <Karan Sutradhar>
  */
 
+#include <iostream>
+#include <memory>
+#include "pidbase.hpp"
 #include "pidcontroller.hpp"
 
 /**
@@ -17,17 +20,22 @@
  */
 
 int main() {
-  double kp = -12, ki = 0, kd = 0, carLen = 1;
+  double carLen = 1;
 
   // Heading and velocity to be achieved.
   // Heading should be between -3.14 and +3.14
   double headingSp = 2, velSp = 1;
   double number_of_iterations = 25;
-  double simulationTime = 0.05;
 
   // Initializing ackerman controller by creating its instance
-  // using constructor with 5 parameters
-  pidController obj(kp, kd, ki, simulationTime, true);
+  // using constructor with 0 parameters
+  pidController obj;
+
+  std::unique_ptr<pidbase> npid = std::make_unique<pidController>();
+
+  npid->setKp(-12);
+  npid->setKd(0);
+  npid->setKi(0);
 
   // initialising new parameters
   double heading = 0, posX = 0, posY = 0;
