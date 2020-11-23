@@ -3,11 +3,10 @@
  * @author Karan Sutradhar: Driver
  * @author Ajinkya Parwekar: Navigator
  * @brief The pidcontroller.cpp file for Ackerman PID controller program.
- * It contains Ackerman PID controller class methods definitions.
+ * It contains Ackerman PID controller derived class methods definitions.
  * @Copyright "Copyright 2020" <Ajinkya Parwekar>
  * @Copyright "Copyright 2020" <Karan Sutradhar>
  */
-
 
 #include "pidcontroller.hpp"
 
@@ -18,9 +17,9 @@
    */
 
   pidController::pidController() {
-    kp = 1;
-    kd = 0;
-    ki = 0;
+    kp = 3;
+    kd = 2;
+    ki = 1;
     dt = 0.1;
     kb = 0;
     errorSum = 0;
@@ -216,36 +215,6 @@
   }
 
   /**
-   * @brief Function to set the proportional gain variable of the PID controller
-   * @param kp (Proportional gain)
-   * @return None.
-   */
-
-  void pidController::setKp(double kpIn) {
-    kp = kpIn;
-  }
-
-  /**
-   * @brief Function to set the differential gain variable of the PID controller
-   * @param kd (Differential gain)
-   * @return None.
-   */
-
-  void pidController::setKd(double kdIn) {
-    kd = kdIn;
-  }
-
-  /**
-   * @brief Function to set the integral gain variable of the PID controller
-   * @param ki (Integral gain)
-   * @return None.
-   */
-
-  void pidController::setKi(double kiIn) {
-    ki = kiIn;
-  }
-
-  /**
    * @brief Function to set the back calculation variable of the PID controller
    * @param kb (for back calculation)
    * @return None.
@@ -267,16 +236,6 @@
 
   void pidController::setSp(double spIn) {
     setpoint = spIn;
-  }
-
-  /**
-   * @brief Function to set the time variable of the PID controller
-   * @param dt (time variable)
-   * @return None.
-   */
-
-  void pidController::setDt(double dtIn) {
-    dt = dtIn;
   }
 
   /**
@@ -549,5 +508,5 @@
    * @return None.
    */
 
-  // ~pidController() {
-  // }
+  pidController::~pidController() {
+  }
