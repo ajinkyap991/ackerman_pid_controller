@@ -10,6 +10,10 @@ We are implementing a PID based controller for an ackermann steering system work
 
 Results and Performances to be included after the implementation.
 
+## Gmock Testing Information
+
+The class "pidbase" is mocked for the gmock testing purpose.
+
 
 ## Authors
 
