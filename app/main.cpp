@@ -62,8 +62,8 @@ int main() {
               << "Current Y Position: " << *posYptr << std::endl;
     // computing steering angle of the vehicle
     obj.computePIDParameters(steerptr, headingptr, rSpeedptr, lSpeedptr);
-    std::cout << "Steering angle PID output in degrees: " << *steerptr << std::endl
-              << std::endl;
+    std::cout << "Steering angle PID output in degrees: "
+      << *steerptr << std::endl << std::endl;
   }
   return 0;
 }

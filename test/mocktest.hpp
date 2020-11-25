@@ -1,3 +1,14 @@
+/**
+ * @file mocktest.hpp
+ * @author Karan Sutradhar: Driver
+ * @author Ajinkya Parwekar: Navigator
+ * @brief Definition of a gmock testing class for Ackerman Steering Mechanism
+ * @Copyright "Copyright 2020" <Ajinkya Parwekar>
+ * @Copyright "Copyright 2020" <Karan Sutradhar>
+ */
+
+#pragma once
+
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 #include "pidbase.hpp"

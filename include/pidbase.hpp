@@ -10,9 +10,9 @@
 
 #pragma once
 
+#include <math.h>
 #include <iostream>
 #include <chrono>
-#include <math.h>
 #include <string>
 #include <vector>
 #define OUTMIN -1e6     // default minimum saturation value
