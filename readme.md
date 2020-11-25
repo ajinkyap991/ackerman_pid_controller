@@ -58,7 +58,7 @@ Simple starter C++ project with:
 ```
 ## Steps to run the program
 ```
-git clone --recursive https://github.com/dpiet/cpp-boilerplate
+git clone -b GMock_Extra_Credit https://github.com/ajinkyap991/ackerman_pid_controller.git
 cd <path to repository>
 mkdir build
 cd build
